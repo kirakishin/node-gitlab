@@ -30,6 +30,10 @@ class ProjectMilestones extends BaseModel
     @debug "Projects::milestone()"
     @get "projects/#{Utils.parseProjectId projectId}/milestones/#{parseInt milestoneId}", (data) => fn data if fn
 
+  showMergeRequests: (projectId, milestoneId, fn = null) =>
+    @debug "Projects::milestone()"
+    @get "projects/#{Utils.parseProjectId projectId}/milestones/#{parseInt milestoneId}/merge_requests", (data) => fn data if fn
+
   add: (projectId, title, description, due_date, fn = null) =>
     @debug "Projects::addMilestone()"
     params =

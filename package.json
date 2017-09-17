@@ -1,5 +1,5 @@
 {
-  "name": "gitlab",
+  "name": "gitlab-kirakishin",
   "version": "1.7.1+dev",
   "description": "GitLab API Nodejs library.",
   "main": "lib/index.js",
@@ -13,7 +13,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/node-gitlab/node-gitlab"
+    "url": "https://github.com/kirakishin/node-gitlab"
   },
   "dependencies": {
     "debug": "*",
