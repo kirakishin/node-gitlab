@@ -26,13 +26,30 @@ class ProjectMilestones extends BaseModel
 
     @get "projects/#{Utils.parseProjectId projectId}/milestones", params, cb
 
+  allMergeRequests: (projectId, fn = null) =>
+    @debug "Projects::Milestones::allMergeRequests()"
+    params = {}
+    params.page ?= 1
+    params.per_page ?= 100
+
+    data = []
+    cb = (err, retData) =>
+      if err
+        return fn(retData || data) if fn
+      else if retData.length == params.per_page
+        @debug "Recurse Projects::Milestones::allMergeRequests()"
+        data = data.concat(retData)
+        params.page++
+        return @get "projects/#{Utils.parseProjectId projectId}/milestones/#{parseInt milestoneId}/merge_requests", params, cb
+      else
+        data = data.concat(retData)
+        return fn data if fn
+
+    @get "projects/#{Utils.parseProjectId projectId}/milestones/#{parseInt milestoneId}/merge_requests", params, cb
+
   show: (projectId, milestoneId, fn = null) =>
     @debug "Projects::milestone()"
     @get "projects/#{Utils.parseProjectId projectId}/milestones/#{parseInt milestoneId}", (data) => fn data if fn
-
-  showMergeRequests: (projectId, milestoneId, fn = null) =>
-    @debug "Projects::milestone()"
-    @get "projects/#{Utils.parseProjectId projectId}/milestones/#{parseInt milestoneId}/merge_requests", (data) => fn data if fn
 
   add: (projectId, title, description, due_date, fn = null) =>
     @debug "Projects::addMilestone()"
