@@ -1,6 +1,6 @@
 {
   "name": "gitlab-kirakishin",
-  "version": "1.8.0+dev",
+  "version": "2.0.0+dev",
   "description": "GitLab API Nodejs library.",
   "main": "lib/index.js",
   "directories": {
